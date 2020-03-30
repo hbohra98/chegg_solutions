@@ -1,6 +1,8 @@
 #include<iostream>
 #include <stdlib.h>
 using namespace std;
+int total_score_user=0;
+int total_score_computer=0;
 char userChoice(){
 char choice;
 cout<<"Welcome to Rock/Paper/Scissors Game! Here are your choices.\n";
@@ -122,4 +124,7 @@ while(true){
         break;
     }
 }
+cout << "Total wins of Computer:" << total_score_computer << endl;
+cout << "Total wins of user:" << total_score_user << endl;
+
 }
