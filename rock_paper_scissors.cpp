@@ -1,14 +1,15 @@
 #include<iostream>
 #include <stdlib.h>
+#include<ctype.h>
 using namespace std;
 int total_score_user=0;
 int total_score_computer=0;
 char userChoice(){
 char choice;
 cout<<"Welcome to Rock/Paper/Scissors Game! Here are your choices.\n";
-cout<<"(R/r)  Rock\n(P/p)  Paper\n(S/s)  Scissors\n";
+cout<<"(R/r)  Rock\n(P/p)  Paper\n(S/s)  Scissors\nQuit\n";
 cin>>choice;
-if(choice!='R' && choice!='r' && choice!='P' && choice!='p' && choice!='S' && choice!='s'){
+if(choice!='R' && choice!='r' && choice!='P' && choice!='p' && choice!='S' && choice!='s' && choice!='Q' && choice!='q'){
     cout<<"Invalid Choice.Please try again!!\n";
     userChoice();
 }
@@ -38,32 +39,38 @@ void determineWinner(char usrchoice,char compchoice){
 //Rock v\s scissors Rock wins
 if((usrchoice=='R' || usrchoice=='r') && (compchoice=='S' || compchoice=='s')){
         cout<<"User wins\n";
+        total_score_user++;
         return;
 }
-else if((usrchoice=='S' || usrchoice=='s') && (compchoice=='P' || compchoice=='p')){
+else if((usrchoice=='S' || usrchoice=='s') && (compchoice=='R' || compchoice=='r')){
     cout<<"Computer wins\n";
+    total_score_computer++;
     return;
 }
 //scissors v\s paper scissors wins
 else if((usrchoice=='S' || usrchoice=='s') && (compchoice=='P' || compchoice=='p')){
         cout<<"User wins\n";
+        total_score_user++;
         return;
 }
 else if((usrchoice=='P' || usrchoice=='p') && (compchoice=='S' || compchoice=='s')){
     cout<<"Computer wins\n";
+    total_score_computer++;
     return;
 }
 //paper v\s rock paper wins
 else if((usrchoice=='P' || usrchoice=='p') && (compchoice=='R' || compchoice=='r')){
     cout<<"User wins\n";
+    total_score_user++;
     return;
 }
 else if((usrchoice=='R' || usrchoice=='r') && (compchoice=='P' || compchoice=='p')){
     cout<<"Computer wins\n";
+    total_score_computer++;
     return;
 }
 //Both have same choice game draws
-else if(usrchoice==compchoice){
+else if(tolower(usrchoice)==tolower(compchoice)){
     cout<<"There is no winner.Game draw\n";
     return;
 }
@@ -87,20 +94,20 @@ else if(ch=='N' || ch=='n')
 void showChoices(char usrchoice,char cmpchoice){
 string usr,cmp;
 //user choice
-    if(usrchoice=='R'){
+    if(usrchoice=='R' || usrchoice=='r'){
         usr="Rock";
     }
-    else if(usrchoice=='P'){
+    else if(usrchoice=='P' || usrchoice=='p'){
         usr="Paper";
     }
     else{
         usr="Scissors";
     }
     //computer choice
-    if(cmpchoice=='R'){
+    if(cmpchoice=='R' || cmpchoice=='r'){
         cmp="Rock";
     }
-    else if(cmpchoice=='P'){
+    else if(cmpchoice=='P' || cmpchoice=='p'){
         cmp="Paper";
     }
     else{
@@ -112,6 +119,8 @@ string usr,cmp;
 int main(){
 while(true){
     char usrchoice=userChoice();
+    if(usrchoice=='q' || usrchoice=='Q')
+        break;
     char compchoice=computerChoice();
     showChoices(usrchoice,compchoice);
     determineWinner(usrchoice,compchoice);
